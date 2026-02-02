@@ -1,2 +1,5 @@
 fastmcp
 langchain-community==0.3.27
+Flask==0.12
+PyYAML==3.12
+requests==2.19.1
