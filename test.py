@@ -7,12 +7,12 @@ import requests  # old versions have CVEs
 
 app = Flask(__name__)
 
-# 🔐 Hardcoded secret
+
 SECRET_KEY = "sk_live_ABC123SUPERSECRET"
 app.secret_key = SECRET_KEY
 
 
-# ❌ SQL Injection
+
 def get_user(username):
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
@@ -23,7 +23,7 @@ def get_user(username):
     return cursor.fetchall()
 
 
-# ❌ Command Injection
+
 @app.route("/ping")
 def ping():
     host = request.args.get("host")
@@ -31,7 +31,7 @@ def ping():
     return "Pinged!"
 
 
-# ❌ Path Traversal
+
 @app.route("/read")
 def read_file():
     filename = request.args.get("file")
@@ -39,7 +39,7 @@ def read_file():
         return f.read()
 
 
-# ❌ Insecure Deserialization
+
 @app.route("/load", methods=["POST"])
 def load_data():
     data = request.data
@@ -47,14 +47,14 @@ def load_data():
     return str(obj)
 
 
-# ❌ XSS
+
 @app.route("/")
 def home():
     name = request.args.get("name", "")
     return f"<h1>Hello {name}</h1>"
 
 
-# ❌ YAML unsafe load (known vuln pattern)
+
 @app.route("/yaml", methods=["POST"])
 def load_yaml():
     content = request.data.decode()
@@ -64,3 +64,4 @@ def load_yaml():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
