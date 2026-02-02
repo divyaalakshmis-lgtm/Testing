@@ -2,8 +2,8 @@ import os
 import sqlite3
 import pickle
 from flask import Flask, request
-import yaml   # vulnerable versions exist
-import requests  # old versions have CVEs
+import yaml   
+import requests  
 
 app = Flask(__name__)
 
@@ -64,4 +64,5 @@ def load_yaml():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
